@@ -1,0 +1,19 @@
+<div class="game">
+    <div class="top">
+    <button (click)="newGame()">Start New Game</button>
+    
+    <h2 *ngIf="complete">Puzzle complete!</h2>
+    </div>
+    <main>
+        <app-square
+            *ngFor="let val of squares; let i = index"
+            [value]="val"
+            [color]="hintColors[i]"
+            (click)="makeMove(i)"
+            [ngStyle]="{'color': 'red'}">
+        
+        </app-square>
+    </main>
+    
+    <h2>Number of mines: {{numberOfMines}}</h2>
+</div>

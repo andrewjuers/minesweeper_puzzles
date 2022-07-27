@@ -1,0 +1,28 @@
+.game {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    position:relative;
+    width: 33%;
+    justify-content: center;
+    align-items: center;
+}
+
+.top {
+    display: inline-table;
+}
+
+main {
+    --width: 100px;
+    display: grid;
+    grid-template-columns: repeat(5, var(--width));
+    grid-gap: 0px;
+}
+
+app-square {
+    border: 1px gray solid;
+    height: 100px;
+}
