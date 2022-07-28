@@ -21,8 +21,11 @@ export class BoardComponent implements OnInit {
   ngOnInit(w:number=5, h:number=5): void {
     this.width = w;
     this.height = h;
-    this.totalSquares = w * h;
+    this.totalSquares = this.width * this.height;
+    this.numberOfMines = Math.ceil(this.totalSquares / 3);
     this.newGame();
+    let main = document.getElementById("game-board");
+    main?.setAttribute("style", "--columns: " + this.width + ";");
   }
 
   newGame() {

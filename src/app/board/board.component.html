@@ -1,19 +1,27 @@
 <div class="game">
     <div class="top">
-    <button (click)="newGame()">Start New Game</button>
-    
-    <h2 *ngIf="complete">Puzzle complete!</h2>
+        <button (click)="newGame()">New Puzzle</button>
+        <h2 *ngIf="complete">Puzzle complete!</h2>
     </div>
-    <main>
+    <main id="game-board">
         <app-square
             *ngFor="let val of squares; let i = index"
             [value]="val"
             [color]="hintColors[i]"
-            (click)="makeMove(i)"
-            [ngStyle]="{'color': 'red'}">
+            (click)="makeMove(i)">
         
         </app-square>
     </main>
     
     <h2>Number of mines: {{numberOfMines}}</h2>
+
+    <form>
+        <label>Rows: </label>
+        <input type="number" [defaultValue]="5" min="3" max="16" id="rows">
+        <label> (3-16)</label><br>
+        <label>Columns: </label>
+        <input type="number" [defaultValue]="5" min="3" max="16" id="columns">
+        <label> (3-16)</label>
+    </form>
+
 </div>
