@@ -6,7 +6,7 @@
 
 button {
     position:relative;
-    width: 33%;
+    width: 150px;
     justify-content: center;
     align-items: center;
 }
