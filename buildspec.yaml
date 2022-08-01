@@ -19,5 +19,5 @@ phases:
 artifacts:
   files:
     - '**/*'
-  base-directory: 'dist/959155_minesweeper-puzzles'
+  base-directory: 'dist/minesweeper-puzzles'
   discard-paths: no
