@@ -14,14 +14,49 @@
     </main>
     
     <h2>Number of mines: {{numberOfMines}}</h2>
-
-    <form>
-        <label>Rows: </label>
-        <input type="number" [defaultValue]="5" min="3" max="16" id="rows">
-        <label> (3-16)</label><br>
-        <label>Columns: </label>
-        <input type="number" [defaultValue]="5" min="3" max="16" id="columns">
-        <label> (3-16)</label>
-    </form>
-
 </div>
+
+<div class="outside-levels">
+    <button style="width: 90px" (click)="showLevels[0]=!showLevels[0]">Intro</button>
+    <div class="inside-levels" *ngIf="showLevels[0]">
+        <button 
+            *ngFor="let level of levels[0]; let i=index"
+            (click)="loadGame(level)">
+            Intro - {{i+1}}</button>
+    </div>
+    <button style="width: 90px" (click)="showLevels[1]=!showLevels[1]">Level 1</button>
+    <div class="inside-levels" *ngIf="showLevels[1]">
+        <button
+        *ngFor="let level of levels[1]; let i=index"
+        (click)="loadGame(level)">
+        Level 1 - {{i+1}}</button>
+    </div>
+    <button style="width: 90px" (click)="showLevels[2]=!showLevels[2]">Level 2</button>
+    <div class="inside-levels" *ngIf="showLevels[2]">
+        <button
+        *ngFor="let level of levels[2]; let i=index"
+        (click)="loadGame(level)">
+        Level 2 - {{i+1}}</button>
+    </div>
+    <button style="width: 90px" (click)="showLevels[3]=!showLevels[3]">Level 3</button>
+    <div class="inside-levels" *ngIf="showLevels[3]">
+        <button
+        *ngFor="let level of levels[3]; let i=index"
+        (click)="loadGame(level)">
+        Level 3 - {{i+1}}</button>
+    </div>
+    <button style="width: 90px" (click)="showLevels[4]=!showLevels[4]">Level 4</button>
+    <div class="inside-levels" *ngIf="showLevels[4]">
+        <button
+        *ngFor="let level of levels[4]; let i=index"
+        (click)="loadGame(level)">
+        Level 4 - {{i+1}}</button>
+    </div>
+    <button style="width: 90px" (click)="showLevels[5]=!showLevels[5]">Bonus</button>
+    <div class="inside-levels" *ngIf="showLevels[5]">
+        <button
+        *ngFor="let level of levels[5]; let i=index"
+        (click)="loadGame(level)">
+        Bonus - {{i+1}}</button>
+    </div>
+</div> 

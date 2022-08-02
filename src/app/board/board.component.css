@@ -27,3 +27,14 @@ app-square {
     border: 1px gray solid;
     height: 100px;
 }
+
+.outside-levels {
+    position: absolute;
+    top: 10%;
+    left: 1%;
+    width: 10%;
+}
+
+.inside-levels {
+    display: grid;
+}

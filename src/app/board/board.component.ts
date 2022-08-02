@@ -15,6 +15,8 @@ export class BoardComponent implements OnInit {
   totalSquares = 25;
   numberOfMines = 8;
   complete = false;
+  levels = [introLevels, levelOne, levelTwo, levelThree, levelFour, bonusLevels];
+  showLevels = [false, false, false, false, false, false];
 
   constructor() { }
 
