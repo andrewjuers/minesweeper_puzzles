@@ -1,3 +1,22 @@
 h1 {
     text-align: center;
+    margin-top: 0.5rem;
+}
+
+.brand {
+    height: 2rem;
+    width: 2rem;
+}
+
+.nav-margin-sides{
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.nav-link{
+    cursor: pointer;
+}
+
+.navbar-nav {
+    
 }
