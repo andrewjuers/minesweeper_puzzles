@@ -1,29 +1,45 @@
 .main {
-    display: grid;
-    grid-template-columns: 150px auto;
-    grid-auto-rows: auto;
+	display: grid;
+	grid-template-columns: repeat(4, auto);
+	background-color: 55, 55, 200, 0.5;
 }
+
+img {
+	position: absolute;
+	background-size:cover;
+	background-repeat: no-repeat;
+	z-index: -1;
+	opacity: 0.1;
+}
+
+
 
 .game {
-    grid-column: 3 / -1;
-    display: grid;
-    justify-content: center;
+	margin-left: 5%;
+    justify-content: right;
     align-items: center;
-}
-
-button {
-    position:relative;
-    width: 150px;
-    justify-content: center;
-    align-items: center;
+	width: 775px;
 }
 
 .top {
-    display: inline-table;
+    display: flex;
+	height: 60px;
+}
+
+.top button {
+    width: 150px;
+	height: 3rem;
+    justify-content: center;
+    align-items: center;
+	margin-right: 1rem;
+}
+
+.top h2 {
+	margin-right: 1rem;
 }
 
 #game-board {
-    --width: 100px;
+    --width: 75px;
     --columns: 5;
     display: grid;
     grid-template-columns: repeat(var(--columns), var(--width));
@@ -31,18 +47,133 @@ button {
 }
 
 app-square {
-    border: 1px gray solid;
-    height: 100px;
+    border: 1px black solid;
+    height: 75px;
 }
 
 .outside-levels {
-    grid-column: span 3;
-    top: 10%;
-    left: 1%;
-    width: 10%;
-    display: grid;
+	width: 25vmin;
+	display: grid;
+	columns: 2;
 }
 
 .inside-levels {
-    display: flex;
+    display: grid;
+	grid-template-columns: repeat(5, auto);
+}
+
+.outside-levels button {
+	width: 5em;
+	height: 50px;
+}
+
+.inside-levels button {
+	width: 100px;
+	height: 25px;
+}
+
+/* Custom Button Styles */
+.intro-button {
+	background-color: #ff5bb0;
+	border-radius: 5px;
+	border:1px solid black;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+}
+.intro-button:hover {
+	background-color:#ef027d;
+}
+.intro-button:active {
+	position:relative;
+	top:1px;
+}
+
+.level1-button {
+	background-color:#2dabf9;
+	border-radius: 5px;
+	border:1px solid black;
+	display:inline-block;
+	cursor:pointer;
+	font-family:Arial;
+	font-size:17px;
+}
+.level1-button:hover {
+	background-color:#0688fa;
+}
+.level1-button:active {
+	position:relative;
+	top:1px;
+}
+
+.level2-button {
+	background-color:#44c767;
+	border-radius: 5px;
+	border:1px solid black;
+	display:inline-block;
+	cursor:pointer;
+	font-family:Arial;
+	font-size:17px;
+}
+.level2-button:hover {
+	background-color:#5cbf2a;
+}
+.level2-button:active {
+	position:relative;
+	top:1px;
+}
+
+.level3-button {
+	background-color: #ffec64;
+	border-radius: 5px;
+	border:1px solid black;
+	display:inline-block;
+	cursor:pointer;
+	font-family:Arial;
+	font-size:17px;
+}
+.level3-button:hover {
+	background-color:yellow;
+}
+.level3-button:active {
+	position:relative;
+	top:1px;
+}
+
+.level4-button {
+	background-color: #fe1a00;
+	border-radius: 5px;
+	border:1px solid black;
+	display:inline-block;
+	cursor:pointer;
+	font-family:Arial;
+	font-size:17px;
+}
+.level4-button:hover {
+	background-color: #ce0100;
+
+}
+.level4-button:active {
+	position:relative;
+	top:1px;
+}
+
+.bonus-button {
+	background-color: #ffc477;
+	border-radius: 5px;
+	border:1px solid black;
+	display:inline-block;
+	cursor:pointer;
+	font-family:Arial;
+	font-size:17px;
+}
+
+.bonus-button:hover {
+	background-color:orange;
+}
+.bonus-button:active {
+	position:relative;
+	top:1px;
 }

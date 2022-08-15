@@ -17,6 +17,7 @@ export class BoardComponent implements OnInit {
   complete = false;
   levels = [introLevels, levelOne, levelTwo, levelThree, levelFour, bonusLevels];
   showLevels = [false, false, false, false, false, false];
+  currentPuzzleName = "Random";
 
   constructor() { }
 
@@ -48,6 +49,8 @@ export class BoardComponent implements OnInit {
     // Update mines and hints
     this.updateMines();
     this.updateHints();
+    // Name random
+    this.currentPuzzleName = "Random";
   }
 
   newRandomPuzzle(){
@@ -150,7 +153,9 @@ export class BoardComponent implements OnInit {
     this.complete = done
   }
 
-  loadGame(info:any = bonusLevels[19]) {
+  loadGame(info:any = bonusLevels[19], name="Random", nameNumber=0) {
+    this.currentPuzzleName = name;
+    if (nameNumber > 0) this.currentPuzzleName = this.currentPuzzleName + nameNumber;
     this.width = info["columns"];
     this.height = info["rows"];
     this.newGame();
@@ -1209,5 +1214,20 @@ let bonusLevels = [ //20
                                     1, 1, 2, 2, 0, 1, 2, 1,
                                     1, 0, 2, 1, 0, 1, 1, 0,
                                     2, 0, 1, 1, 0, 0, 0, 0,]},
+
+];
+
+let tutorialLevels = [
+  {"rows": 3, "columns": 3, "board": [2, 0, 0,
+                                      0, 1, 0,
+                                      0, 0, 0]},
+
+  {"rows": 3, "columns": 3, "board": [2, 2, 2,
+                                      2, 1, 2,
+                                      2, 2, 2]},
+
+  {"rows": 3, "columns": 3, "board": [1, 2, 2,
+                                      2, 2, 1,
+                                      0, 2, 2]},
 
 ];

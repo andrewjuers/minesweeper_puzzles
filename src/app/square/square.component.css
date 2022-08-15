@@ -1,7 +1,8 @@
 button {
-    border: 1px gray solid;
-    height: 100px;
-    width: 100px;
+    --boxsize: 75px;
+    border: 1px black solid;
+    height: var(--boxsize);
+    width: var(--boxsize);
     font-size: 32px;
     font-weight: bold;
 }
@@ -16,4 +17,12 @@ button {
 
 .blue {
     color: blue;
+}
+
+.image-button img {
+    --imgsize: 50px;
+    justify-content: center;
+    align-items: center;
+    width: var(--imgsize);
+    height: var(--imgsize);
 }

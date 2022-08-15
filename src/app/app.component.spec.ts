@@ -1,8 +1,11 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
+  let fixture:  ComponentFixture<AppComponent>;
+  const authServiceSpy = jasmine.createSpyObj('AuthService',['isAuthenticated','signOut']);
+  authServiceSpy.isAuthenticated.and.returnValue(false);
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
@@ -32,4 +35,10 @@ describe('AppComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('.content span')?.textContent).toContain('minesweeper-puzzles app is running!');
   });
+
+  it('should have links for Home, Puzzles, and Sign In', () => {
+    const links = fixture.nativeElement.querySelectorAll('a');
+    expect(links[1].textContent).toEqual('Home');
+    expect(links[2].textContent.toEqual('board'));
+  })
 });

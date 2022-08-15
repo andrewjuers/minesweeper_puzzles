@@ -1,1 +1,3 @@
-<button class={{color}}>{{value}}</button>
+<button class={{color}} *ngIf="!mine() && !blocked()">{{value}}</button>
+<button class="image-button" *ngIf="mine()"><img src="assets/images/mine.png"></button>
+<button class="image-button" *ngIf="blocked()"><img src="assets/images/block.png"></button>

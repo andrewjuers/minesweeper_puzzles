@@ -10,4 +10,13 @@ export class SquareComponent {
   @Input() value: 'B' | 'X' | number | undefined;
   @Input() color: string | undefined;
 
+  mine(): boolean {
+    if (this.value == 'B') return true;
+    return false;
+  }
+
+  blocked(): boolean {
+    return this.value == 'X' ? true : false;
+  }
+
 }
