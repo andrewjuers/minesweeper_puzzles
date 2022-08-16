@@ -153,7 +153,7 @@ export class BoardComponent implements OnInit {
     this.complete = done
   }
 
-  loadGame(info:any = bonusLevels[19], name="Random", nameNumber=0) {
+  loadGame(info:any = introLevels[0], name="Random", nameNumber=0) {
     this.currentPuzzleName = name;
     if (nameNumber > 0) this.currentPuzzleName = this.currentPuzzleName + nameNumber;
     this.width = info["columns"];
