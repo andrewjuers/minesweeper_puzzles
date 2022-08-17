@@ -16,7 +16,7 @@ export interface IUser {
 })
 export class CognitoService {
 
-  private authenticationSubject: BehaviorSubject<any>;
+  public authenticationSubject: BehaviorSubject<any>;
 
   constructor() {
     Amplify.configure({
@@ -49,23 +49,6 @@ export class CognitoService {
     .then(() => {
       this.authenticationSubject.next(false);
     });
-  }
-
-  public isAuthenticated(): Promise<boolean> {
-    if (this.authenticationSubject.value) {
-      return Promise.resolve(true);
-    } else {
-      return this.getUser()
-      .then((user: any) => {
-        if (user) {
-          return true;
-        } else {
-          return false;
-        }
-      }).catch(() => {
-        return false;
-      });
-    }
   }
 
   public getUser(): Promise<any> {

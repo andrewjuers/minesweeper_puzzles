@@ -7,11 +7,14 @@
       <li class="nav-item nav-margin-sides">
         <a class="nav-link" routerLink="/board">Puzzles</a>
       </li>
-      <li class="nav-item  nav-margin-sides">
-        <a class="nav-link" routerLink="signIn">Sign In</a>
+      <li class="nav-item  nav-margin-sides" *ngIf="!isAuthenticated">
+        <a class="nav-link" routerLink="/signIn" >Login</a>
       </li>
-      <li class="nav-item  nav-margin-sides">
-        <a class="nav-link" routerLink="signUp">Sign Up</a>
+      <li class="nav-item nav-margin-sides" *ngIf="isAuthenticated">
+        <a class="nav-link" routerLink="/profile">Profile</a>
+      </li>
+      <li class="nav-item nav-margin-sides" *ngIf="isAuthenticated">
+        <a class="nav-link" routerLink="" (click)="signOut()">Sign Out</a>
       </li>
     </ul>
 </nav>

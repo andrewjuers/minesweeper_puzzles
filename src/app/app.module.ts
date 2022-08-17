@@ -11,6 +11,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomePageComponent } from './home-page/home-page.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { HomePageComponent } from './home-page/home-page.component';
     BoardComponent,
     SignUpComponent,
     SignInComponent,
-    HomePageComponent
+    HomePageComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
