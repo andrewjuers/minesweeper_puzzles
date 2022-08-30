@@ -24,6 +24,7 @@
     "@ng-bootstrap/ng-bootstrap": "^13.0.0",
     "@popperjs/core": "^2.10.2",
     "aws-amplify": "^4.3.31",
+    "aws-sdk": "^2.1204.0",
     "bootstrap": "^5.2.0",
     "rxjs": "~7.5.0",
     "startbootstrap-landing-page": "^6.0.5",

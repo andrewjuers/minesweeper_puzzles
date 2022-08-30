@@ -25,62 +25,27 @@
 
     <div class="outside-levels">
         <h2>* Levels *</h2>
-        <button style="width: 75px" (click)="showLevels[0]=!showLevels[0]" class="intro-button">Intro</button>
-        <div class="inside-levels" *ngIf="showLevels[0]">
+        <button style="width: 75px" (click)="toggleShowLevels(levels[0], 'Intro')" class="intro-button">Intro</button>
+
+        <button style="width: 75px" (click)="toggleShowLevels(levels[1], 'Level 1')" class="level1-button">Level 1</button>
+        
+        <button style="width: 75px" (click)="toggleShowLevels(levels[2], 'Level 2')" class="level2-button">Level 2</button>
+       
+        <button style="width: 75px" (click)="toggleShowLevels(levels[3], 'Level 3')" class="level3-button">Level 3</button>
+       
+        <button style="width: 75px" (click)="toggleShowLevels(levels[4], 'Level 4')" class="level4-button">Level 4</button>
+       
+        <button style="width: 75px" (click)="toggleShowLevels(levels[5], 'Bonus')" class="bonus-button">Bonus</button>
+        
+    </div>
+    <div class="section3">
+        <div class="inside-levels" *ngIf="displayLevels">
             <button 
-                *ngFor="let level of levels[0]; let i=index"
-                (click)="loadGame(level, 'Intro - ', i+1)">
-                Intro - {{i+1}}</button>
-        </div>
-        <button style="width: 75px" (click)="showLevels[1]=!showLevels[1]" class="level1-button">Level 1</button>
-        <div class="inside-levels" *ngIf="showLevels[1]">
-            <button
-            *ngFor="let level of levels[1]; let i=index"
-            (click)="loadGame(level, 'Level 1 - ', i+1)">
-            Level 1 - {{i+1}}</button>
-        </div>
-        <button style="width: 75px" (click)="showLevels[2]=!showLevels[2]" class="level2-button">Level 2</button>
-        <div class="inside-levels" *ngIf="showLevels[2]">
-            <button
-            *ngFor="let level of levels[2]; let i=index"
-            (click)="loadGame(level, 'Level 2 - ', i+1)">
-            Level 2 - {{i+1}}</button>
-        </div>
-        <button style="width: 75px" (click)="showLevels[3]=!showLevels[3]" class="level3-button">Level 3</button>
-        <div class="inside-levels" *ngIf="showLevels[3]">
-            <button
-            *ngFor="let level of levels[3]; let i=index"
-            (click)="loadGame(level, 'Level 3 - ', i+1)">
-            Level 3 - {{i+1}}</button>
-        </div>
-        <button style="width: 75px" (click)="showLevels[4]=!showLevels[4]" class="level4-button">Level 4</button>
-        <div class="inside-levels" *ngIf="showLevels[4]">
-            <button
-            *ngFor="let level of levels[4]; let i=index"
-            (click)="loadGame(level, 'Level 4 - ', i+1)">
-            Level 4 - {{i+1}}</button>
-        </div>
-        <button style="width: 75px" (click)="showLevels[5]=!showLevels[5]" class="bonus-button">Bonus</button>
-        <div class="inside-levels" *ngIf="showLevels[5]">
-            <button
-            *ngFor="let level of levels[5]; let i=index"
-            (click)="loadGame(level, 'Bonus - ', i+1)">
-            Bonus - {{i+1}}</button>
+                *ngFor="let level of displayLevels; let i=index"
+                (click)="loadGame(level, currentPuzzleName, i+1)">
+                {{i+1}}</button>
         </div>
     </div> 
-
-    <div class="section3">
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Leaderboards
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </div>
-    </div>
 
     <div class="section4"></div>
 </div>

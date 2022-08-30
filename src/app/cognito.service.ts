@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Amplify, Auth } from 'aws-amplify';
 import { environment } from '../environments/environment';
 
@@ -60,6 +60,24 @@ export class CognitoService {
     .then((cognitoUser: any) => {
       return Auth.updateUserAttributes(cognitoUser, user);
     });
+  }
+
+  public isAuthenticated(): Promise<boolean> {
+    if (this.authenticationSubject.value) {
+      return Promise.resolve(true);
+    } else {
+      return this.getUser()
+        .then((user: any) => {
+          if (user) {
+            return true;
+          } else {
+            return false;
+          }
+        })
+        .catch(() => {
+          return false;
+        });
+    }
   }
 
 }

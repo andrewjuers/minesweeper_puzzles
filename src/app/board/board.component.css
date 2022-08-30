@@ -1,5 +1,5 @@
 .main {
-	display: grid;
+	display: flex;
 	grid-template-columns: repeat(4, auto);
 	background-color: 55, 55, 200, 0.5;
 }
@@ -12,18 +12,16 @@ img {
 	opacity: 0.1;
 }
 
-
-
 .game {
 	margin-left: 5%;
     justify-content: right;
     align-items: center;
-	width: 775px;
+	min-width: 800px;
 }
 
 .top {
     display: flex;
-	height: 60px;
+	height: 4em;
 }
 
 .top button {
@@ -70,6 +68,10 @@ app-square {
 .inside-levels button {
 	width: 100px;
 	height: 25px;
+}
+
+.section3 {
+	border-style: solid;
 }
 
 /* Custom Button Styles */

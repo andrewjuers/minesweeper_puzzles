@@ -16,8 +16,9 @@ export class BoardComponent implements OnInit {
   numberOfMines = 8;
   complete = false;
   levels = [introLevels, levelOne, levelTwo, levelThree, levelFour, bonusLevels];
-  showLevels = [false, false, false, false, false, false];
   currentPuzzleName = "Random";
+  currentDisplayLevelsName = "";
+  displayLevels: any = false;
 
   constructor() { }
 
@@ -155,7 +156,7 @@ export class BoardComponent implements OnInit {
 
   loadGame(info:any = introLevels[0], name="Random", nameNumber=0) {
     this.currentPuzzleName = name;
-    if (nameNumber > 0) this.currentPuzzleName = this.currentPuzzleName + nameNumber;
+    if (nameNumber > 0) this.currentPuzzleName = this.currentDisplayLevelsName + " - " + nameNumber;
     this.width = info["columns"];
     this.height = info["rows"];
     this.newGame();
@@ -172,7 +173,21 @@ export class BoardComponent implements OnInit {
     this.updateMines();
     this.updateHints();
   }
+
+  toggleShowLevels(levels:any, name:string = "") {
+    if (this.displayLevels == levels) {
+      this.showLevels();
+      return;
+    }
+    this.showLevels(levels);
+    this.currentDisplayLevelsName = name;
+  }
+
+  showLevels(levels:any = false) {
+    this.displayLevels = levels;
+  }
 }
+
 
 function removeElement(a:any[], e:any): any[] { // Remove element e from array a
   const index = a.indexOf(e)

@@ -19,6 +19,12 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    this.cognitoService.isAuthenticated().then((success: boolean) => {
+      this.isAuthenticated = success;
+      if (this.isAuthenticated === false) {
+        this.router.navigate(['/']);
+      }
+    });
     this.cognitoService.authenticationSubject.subscribe( res => {
       this.isAuthenticated = res
     });
@@ -27,7 +33,7 @@ export class AppComponent implements OnInit {
   public signOut(): void {
     this.cognitoService.signOut()
     .then(() => {
-      this.router.navigate(['/signIn']);
+      this.router.navigate(['/']);
     });
   }
 
