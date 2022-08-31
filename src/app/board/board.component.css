@@ -50,7 +50,6 @@ app-square {
 }
 
 .outside-levels {
-	width: 25vmin;
 	display: grid;
 	columns: 2;
 }
@@ -71,6 +70,7 @@ app-square {
 }
 
 .section3 {
+	margin-top: 4em;
 	border-style: solid;
 }
 

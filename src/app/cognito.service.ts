@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Amplify, Auth } from 'aws-amplify';
 import { environment } from '../environments/environment';
+import { int } from 'aws-sdk/clients/datapipeline';
 
 export interface IUser {
   email: string;
@@ -9,6 +10,13 @@ export interface IUser {
   showPassword: boolean;
   code: string;
   name: string;
+  score: int;
+  intro: string;
+  level1: string;
+  level2: string;
+  level3: string;
+  level4: string;
+  bonus: string;
 }
 
 @Injectable({

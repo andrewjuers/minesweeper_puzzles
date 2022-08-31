@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { IUser, CognitoService } from '../cognito.service';
+import { AwsGatewayService } from '../aws-gateway.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -14,7 +15,8 @@ export class SignUpComponent {
   user: IUser;
 
   constructor(private router: Router,
-              private cognitoService: CognitoService) {
+              private cognitoService: CognitoService,
+              private awsGatewayService: AwsGatewayService) {
     this.loading = false;
     this.isConfirm = false;
     this.user = {} as IUser;
@@ -35,6 +37,7 @@ export class SignUpComponent {
     this.loading = true;
     this.cognitoService.confirmSignUp(this.user)
     .then(() => {
+      this.awsGatewayService.postData(this.user);
       this.router.navigate(['/signIn']);
     }).catch(() => {
       this.loading = false;

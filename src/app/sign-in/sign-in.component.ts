@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { IUser, CognitoService } from '../cognito.service';
+import { AwsGatewayService } from '../aws-gateway.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -14,7 +15,8 @@ export class SignInComponent {
   user: IUser;
 
   constructor(private router: Router,
-              private cognitoService: CognitoService) {
+              private cognitoService: CognitoService,
+              private awsGatewayService: AwsGatewayService) {
     this.loading = false;
     this.user = {} as IUser;
   }
@@ -23,7 +25,7 @@ export class SignInComponent {
     this.loading = true;
     this.cognitoService.signIn(this.user)
     .then(() => {
-      this.router.navigate(['']);
+      this.router.navigate(['/board']);
     }).catch(() => {
       this.loading = false;
     });

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IUser, CognitoService } from '../cognito.service';
+import { AwsGatewayService } from '../aws-gateway.service';
 
 @Component({
   selector: 'app-board',
@@ -19,14 +21,24 @@ export class BoardComponent implements OnInit {
   currentPuzzleName = "Random";
   currentDisplayLevelsName = "";
   displayLevels: any = false;
+  user:IUser;
+  loading:boolean;
+  won = false;
 
-  constructor() { }
-
+  constructor(private cognitoService: CognitoService, private awsGatewayService: AwsGatewayService) {
+    this.loading = false;
+    this.user = {} as IUser;
+  }
   ngOnInit(w:number=5, h:number=5): void {
+    this.cognitoService.getUser()
+    .then((user) => {
+      this.user.email = user.attributes["email"];
+      this.getUserInfo();
+    });
     this.width = w;
     this.height = h;
     this.newGame();
-    this.loadGame();
+    this.newRandomPuzzle();
     
   }
 
@@ -38,6 +50,8 @@ export class BoardComponent implements OnInit {
     // Set columns in css
     let main = document.getElementById("game-board");
     main?.setAttribute("style", "--columns: " + this.width + ";");
+    // Reset gamestate
+    this.won = false;
   }
 
   randomPuzzle() {
@@ -86,6 +100,17 @@ export class BoardComponent implements OnInit {
 
   addHint() {
     this.squares.splice(this.randomEmptySquareIndex(), 1, 0);
+  }
+
+  public update(): void {
+    this.loading = true;
+
+    this.cognitoService.updateUser(this.user)
+    .then(() => {
+      this.loading = false;
+    }).catch(() => {
+      this.loading = false;
+    });
   }
 
   updateMines() {
@@ -152,6 +177,7 @@ export class BoardComponent implements OnInit {
       }
     }
     this.complete = done
+    if (done) this.winGame();
   }
 
   loadGame(info:any = introLevels[0], name="Random", nameNumber=0) {
@@ -186,7 +212,40 @@ export class BoardComponent implements OnInit {
   showLevels(levels:any = false) {
     this.displayLevels = levels;
   }
+
+  getUserInfo() {
+    this.awsGatewayService.getData(this.user.email).subscribe(
+      (data:any) => {
+        this.user.score = Number(data.score["N"]);
+        this.user.intro = data.intro["S"];
+        this.user.level1 = data.level1["S"];
+        this.user.level2 = data.level2["S"];
+        this.user.level3 = data.level3["S"];
+        this.user.level4 = data.level4["S"];
+        this.user.bonus = data.bonus["S"];
+        console.log(data.score);
+        this.postUserInfo();
+      }
+    );
+  }
+
+  postUserInfo() {
+    this.awsGatewayService.postData(this.user);
+  }
+
+  winGame() {
+    if (!this.won) {
+      this.user.score += 1;
+      this.postUserInfo();
+    }
+    console.log(this.user.score);
+    this.won = true;
+  }
+  
 }
+
+
+
 
 
 function removeElement(a:any[], e:any): any[] { // Remove element e from array a
