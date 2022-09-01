@@ -21,7 +21,8 @@ export class AwsGatewayService {
       level2: user.level2 == undefined ? new Array(32).join("0") : user.level2,
       level3: user.level3 == undefined ? new Array(23).join("0") : user.level3,
       level4: user.level4 == undefined ? new Array(15).join("0") : user.level4,
-      bonus: user.bonus == undefined ? new Array(21).join("0") : user.bonus
+      bonus: user.bonus == undefined ? new Array(21).join("0") : user.bonus,
+      levels: this.setLevelScore(user).toString()
     }).subscribe((data) => {
       console.log(data);
     });
@@ -37,6 +38,38 @@ export class AwsGatewayService {
       );
   }
 
+  getLeaderboard(l: string): any {
+    return this.http
+      .get(this.baseURL + '/minesweeper-puzzles/leaderboard/?leaderboard=' + l)
+      .pipe(
+        map((data: any) => {
+          return data;
+        })
+      );
+  }
 
+  setLevelScore(user:IUser) {
+    let score = 0;
+    let levels = [
+      user.intro,
+      user.level1,
+      user.level2,
+      user.level3,
+      user.level4,
+      user.bonus
+    ];
+    for (var level of levels) {
+      score += this.checkStringForOnes(level);
+    }
+    return score;
+  }
+
+  checkStringForOnes(s: string): number {
+    let oneCount = 0;
+    for (let i=0; i<s.length; i++) {
+      if (s.charAt(i) == '1') oneCount++;
+    }
+    return oneCount;
+  }
 
 }

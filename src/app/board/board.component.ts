@@ -256,7 +256,6 @@ export class BoardComponent implements OnInit {
     if (this.user.email == undefined) return false;
     // Use regex to determine proper user atrribute
     const name = win ? this.currentPuzzleName.toLocaleLowerCase().replace(/\s+/g, '').match(/^[^-]*/) : this.currentDisplayLevelsName.toLocaleLowerCase().replace(/\s+/g, '');
-    if (win) console.log("name: " + name);
     let levelString = "";
     let c = '';
     if (name == "intro") {
