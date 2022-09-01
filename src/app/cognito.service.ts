@@ -17,6 +17,7 @@ export interface IUser {
   level3: string;
   level4: string;
   bonus: string;
+  levels: int;
 }
 
 @Injectable({

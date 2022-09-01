@@ -18,7 +18,6 @@ export class HomePageComponent implements OnInit {
     this.awsGatewayService.getLeaderboard("levels").subscribe(
       (data:any) => {
         this.topLevelClears = data;
-        console.log(data);
       }
     );
     this.awsGatewayService.getLeaderboard("score").subscribe(
