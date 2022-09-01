@@ -5,15 +5,14 @@
 }
 
 .game {
-	margin-left: 5%;
-    justify-content: right;
+	margin-left: 2em;
     align-items: center;
 	min-width: 800px;
 }
 
 .top {
     display: flex;
-	height: 4em;
+	height: 3.125em;
 }
 
 .top button {
@@ -21,6 +20,7 @@
     justify-content: center;
     align-items: center;
 	margin-right: 1rem;
+	background-color: #e7e7e7 !important;
 }
 
 .top h2 {

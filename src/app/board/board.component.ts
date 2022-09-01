@@ -15,6 +15,8 @@ export class BoardComponent implements OnInit {
   hintColors: any[] = [];
   width = 5;
   height = 5;
+  nextWidth = 5;
+  nextHeight = 5;
   totalSquares = 25;
   numberOfMines = 8;
   complete = false;
@@ -26,6 +28,7 @@ export class BoardComponent implements OnInit {
   loading:boolean;
   won = false;
   mineImage = "assets/images/heart.png";
+  blocking = false;
 
   constructor(private cognitoService: CognitoService, private awsGatewayService: AwsGatewayService) {
     this.loading = false;
@@ -44,14 +47,16 @@ export class BoardComponent implements OnInit {
     
   }
 
-  newGame() {
-    this.totalSquares = this.width * this.height;
+  newGame(width=this.width, height=this.height) {
+    this.width = width;
+    this.height = height;
+    this.totalSquares = width * height;
     this.squares = Array(this.totalSquares).fill(null);
     this.mineSquares = Array(this.totalSquares).fill(null);
     this.hintColors = Array(this.totalSquares).fill("black");
     // Set columns in css
     let main = document.getElementById("game-board");
-    main?.setAttribute("style", "--columns: " + this.width + ";");
+    main?.setAttribute("style", "--columns: " + width + ";");
     // Reset gamestate
     this.won = false;
   }
@@ -71,7 +76,7 @@ export class BoardComponent implements OnInit {
   }
 
   newRandomPuzzle(){
-    this.newGame();
+    this.newGame(this.nextWidth, this.nextHeight);
     this.randomPuzzle();
   }
 
@@ -80,7 +85,8 @@ export class BoardComponent implements OnInit {
       this.squares.splice(idx, 1, 'B');
     }
     else if (this.squares[idx] == 'B') {
-      this.squares.splice(idx, 1, 'X');
+      let c: any = this.blocking ? 'X' : null;
+      this.squares.splice(idx, 1, c);
     }
     else if (this.squares[idx] == 'X') {
       this.squares.splice(idx, 1, null);
@@ -314,6 +320,22 @@ export class BoardComponent implements OnInit {
 
   toggleMineImage() {
     this.mineImage = this.mineImage == "assets/images/heart.png" ? "assets/images/mine.png" : "assets/images/heart.png";
+  }
+
+  toggleBlock() {
+    this.blocking = !this.blocking;
+    if (!this.blocking) {
+      for (let i=0; i<this.squares.length; i++) {
+        if (this.squares[i] == 'X') this.squares[i] = null; 
+      } 
+    }
+  }
+
+  clearBoard() {
+    for (let i=0; i<this.squares.length; i++) {
+      if (this.squares[i] == 'X' || this.squares[i] == 'B') this.squares[i] = null; 
+    }
+    this.updateHints();
   }
 
 }

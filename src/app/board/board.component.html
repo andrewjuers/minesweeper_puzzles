@@ -1,12 +1,18 @@
-<img>
-
 <div class="main">
-    
+    <div>
+        <h2>Random Puzzles</h2>
+        <label type="text">Width:</label><br>
+        <input type="number" value={{nextWidth}} min="3" max="10" [(ngModel)]=nextWidth><br>
+        <label type="text">Height:</label><br>
+        <input type="number" value={{nextHeight}} min="3" max="10" [(ngModel)]=nextHeight><br>
+        <button (click)="newRandomPuzzle()">New Random Puzzle</button>
+
+    </div>
 
     <div class="game">
         <div class="top">
-            <button (click)="newRandomPuzzle()">New Random Puzzle</button>
             <button id="toggle-mine-button" (click)="toggleMineImage()" style="background: url({{mineImage}}); width: 3em; height: 3em; background-size: contain;"></button>
+            <button id="toggle=block-button" (click)="toggleBlock()" style="background:url('assets/images/block.png');width: 3em; height: 3em; background-size: contain;"><p *ngIf=!blocking style="color: white; text-align: center; margin-top: 0.5em;">Off</p></button>
             <h2>{{currentPuzzleName}} ({{width}}x{{height}})</h2>
             <h2 *ngIf="complete" style="color: green;">Puzzle solved!</h2>
         </div>
@@ -22,6 +28,7 @@
         </div>
         
         <h2>Number of mines: {{numberOfMines}}</h2>
+        <button (click)="clearBoard()">Clear Board</button>
     </div>
 
     <div class="outside-levels">
@@ -46,10 +53,11 @@
                 *ngFor="let level of displayLevels; let i=index"
                 (click)="loadGame(level, currentPuzzleName, i+1)">
                 {{i+1}}
-                <img *ngIf="getLevelSaveData(i)" style="margin-top: 0.125em; margin-left:1em; width:1em;height:1em;z-index: 100; opacity: 100;" src="assets/images/heart.png">
+                <img *ngIf="getLevelSaveData(i)" style="margin-top: 0.125em; margin-left:1em; width:1em;height:1em;z-index: 100; opacity: 100;" src={{mineImage}}>
             </button>
         </div>
     </div> 
 
-    <div class="section4"></div>
+    <div class="section4">
+    </div>
 </div>
