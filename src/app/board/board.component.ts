@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IUser, CognitoService } from '../cognito.service';
 import { AwsGatewayService } from '../aws-gateway.service';
+import { int } from 'aws-sdk/clients/datapipeline';
 
 @Component({
   selector: 'app-board',
@@ -198,6 +199,7 @@ export class BoardComponent implements OnInit {
     // Update mines and hints
     this.updateMines();
     this.updateHints();
+    let x = this.getLevelSaveData(1);
   }
 
   toggleShowLevels(levels:any, name:string = "") {
@@ -223,7 +225,6 @@ export class BoardComponent implements OnInit {
         this.user.level3 = data.level3["S"];
         this.user.level4 = data.level4["S"];
         this.user.bonus = data.bonus["S"];
-        console.log(data.score);
         this.postUserInfo();
       }
     );
@@ -234,14 +235,78 @@ export class BoardComponent implements OnInit {
   }
 
   winGame() {
-    if (!this.won) {
+    if (!this.won && (this.currentPuzzleName == "Random" || !this.getLevelSaveData(Number(this.currentPuzzleName.slice(-1)) - 1))) {
       this.user.score += 1;
+      if (this.currentPuzzleName != "Random") this.getLevelSaveData(Number(this.currentPuzzleName.slice(-1)) - 1, true);
       this.postUserInfo();
     }
-    console.log(this.user.score);
     this.won = true;
   }
+
+  getLevelSaveData(idx: number, win=false): boolean {
+    // Stop if user is not logged in
+    if (this.user.email == undefined) return false;
   
+    const name = this.currentDisplayLevelsName.toLocaleLowerCase().replace(/\s+/g, '');
+    let levelString = "";
+    let c = '';
+    if (name == "intro") {
+      levelString = this.user.intro;
+      c = levelString.charAt(idx);
+      if (win) {
+        levelString = levelString.substring(0,idx) + '1' + levelString.substring(idx+1);
+        this.user.intro = levelString;
+      }
+    }
+    else if (name == "level1"){
+      levelString = this.user.level1;
+      c = levelString.charAt(idx);
+      if (win) {
+        levelString = levelString.substring(0,idx) + '1' + levelString.substring(idx+1);
+        this.user.level1 = levelString;
+      }
+    }
+    else if (name == "level2") {
+      levelString = this.user.level2;
+      c = levelString.charAt(idx);
+      if (win) {
+        levelString = levelString.substring(0,idx) + '1' + levelString.substring(idx+1);
+        this.user.level2 = levelString;
+      }
+    }
+    else if (name == "level3") {
+      levelString = this.user.level3;
+      c = levelString.charAt(idx);
+      if (win) {
+        levelString = levelString.substring(0,idx) + '1' + levelString.substring(idx+1);
+        this.user.level3 = levelString;
+      }
+    } 
+    else if (name == "level4") {
+      levelString = this.user.level4;
+      c = levelString.charAt(idx);
+      if (win) {
+        levelString = levelString.substring(0,idx) + '1' + levelString.substring(idx+1);
+        this.user.level4 = levelString;
+      }
+    }
+    else if (name == "bonus") {
+      levelString = this.user.bonus;
+      c = levelString.charAt(idx);
+      if (win) {
+        levelString = levelString.substring(0,idx) + '1' + levelString.substring(idx+1);
+        this.user.bonus = levelString;
+      }
+    } 
+    if (win && this.currentPuzzleName != "Random") {
+      console.log(levelString);
+      this.postUserInfo();
+      return true;
+    }
+    
+    return c == '1';
+  }
+
 }
 
 

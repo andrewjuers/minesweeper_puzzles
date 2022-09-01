@@ -44,7 +44,9 @@
             <button 
                 *ngFor="let level of displayLevels; let i=index"
                 (click)="loadGame(level, currentPuzzleName, i+1)">
-                {{i+1}}</button>
+                {{i+1}}
+                <p *ngIf="getLevelSaveData(i)" style="margin-top: -1.5em; margin-left:3em;">*</p>
+            </button>
         </div>
     </div> 
 
