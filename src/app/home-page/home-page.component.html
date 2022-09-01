@@ -27,6 +27,36 @@
                         <img src="assets/images/10x10.PNG" style="height:25em">
                     </div>
                 </div>
+                <div style="margin-top: -32em; margin-right: 4em">
+                    <h2>Top Level Clears</h2>
+                    <table>
+                        <tr>
+                            <th>Rank</th>
+                            <th>User</th>
+                            <th>Score</th>
+                        </tr>
+                        <tr *ngFor="let user of topLevelClears; let i = index">
+                            <td>{{i+1}}</td>
+                            <td>{{user["email"]['S']}}</td>
+                            <td>{{user["levels"]['N']}}</td>
+                        </tr>
+                        
+                    </table>
+                    <br>
+                    <h2>Top Puzzles Solved</h2>
+                    <table>
+                        <tr>
+                            <th>Rank</th>
+                            <th>User</th>
+                            <th>Score</th>
+                        </tr>
+                        <tr *ngFor="let user of topPuzzlesSolved; let i = index">
+                            <td>{{i+1}}</td>
+                            <td>{{user["email"]['S']}}</td>
+                            <td>{{user["score"]['N']}}</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </header>
