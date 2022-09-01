@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IUser, CognitoService } from '../cognito.service';
+import { AwsGatewayService } from '../aws-gateway.service';
 
 @Component({
   selector: 'app-profile',
@@ -11,7 +12,7 @@ export class ProfileComponent implements OnInit {
   loading: boolean;
   user: IUser;
 
-  constructor(private cognitoService: CognitoService) {
+  constructor(private cognitoService: CognitoService, private awsGatewayService: AwsGatewayService) {
     this.loading = false;
     this.user = {} as IUser;
   }
@@ -20,6 +21,7 @@ export class ProfileComponent implements OnInit {
     this.cognitoService.getUser()
     .then((user: any) => {
       this.user = user.attributes;
+      this.getUserInfo();
     });
   }
 
@@ -32,6 +34,20 @@ export class ProfileComponent implements OnInit {
     }).catch(() => {
       this.loading = false;
     });
+  }
+
+  getUserInfo() {
+    this.awsGatewayService.getData(this.user.email).subscribe(
+      (data:any) => {
+        this.user.score = Number(data.score["N"]);
+        this.user.intro = data.intro["S"];
+        this.user.level1 = data.level1["S"];
+        this.user.level2 = data.level2["S"];
+        this.user.level3 = data.level3["S"];
+        this.user.level4 = data.level4["S"];
+        this.user.bonus = data.bonus["S"];
+      }
+    );
   }
 
 }

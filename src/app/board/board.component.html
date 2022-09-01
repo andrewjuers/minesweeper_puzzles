@@ -6,6 +6,7 @@
     <div class="game">
         <div class="top">
             <button (click)="newRandomPuzzle()">New Random Puzzle</button>
+            <button id="toggle-mine-button" (click)="toggleMineImage()" style="background: url({{mineImage}}); width: 3em; height: 3em; background-size: contain;"></button>
             <h2>{{currentPuzzleName}} ({{width}}x{{height}})</h2>
             <h2 *ngIf="complete" style="color: green;">Puzzle solved!</h2>
         </div>
@@ -14,14 +15,13 @@
                 *ngFor="let val of squares; let i=index"
                 [value]="val"
                 [color]="hintColors[i]"
+                [mineImage]="mineImage"
                 (click)="makeMove(i)">
-            
             </app-square>
             
         </div>
         
         <h2>Number of mines: {{numberOfMines}}</h2>
-        <h2 *ngIf="user.score">Number of puzzles completed: {{user.score}}</h2>
     </div>
 
     <div class="outside-levels">
@@ -40,12 +40,13 @@
         
     </div>
     <div class="section3">
+        <h2>{{currentDisplayLevelsName}}</h2>
         <div class="inside-levels" *ngIf="displayLevels">
             <button 
                 *ngFor="let level of displayLevels; let i=index"
                 (click)="loadGame(level, currentPuzzleName, i+1)">
                 {{i+1}}
-                <p *ngIf="getLevelSaveData(i)" style="margin-top: -1.5em; margin-left:3em;">*</p>
+                <img *ngIf="getLevelSaveData(i)" style="margin-top: 0.125em; margin-left:1em; width:1em;height:1em;z-index: 100; opacity: 100;" src="assets/images/heart.png">
             </button>
         </div>
     </div> 

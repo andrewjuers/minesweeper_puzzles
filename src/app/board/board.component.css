@@ -4,14 +4,6 @@
 	background-color: 55, 55, 200, 0.5;
 }
 
-img {
-	position: absolute;
-	background-size:cover;
-	background-repeat: no-repeat;
-	z-index: -1;
-	opacity: 0.1;
-}
-
 .game {
 	margin-left: 5%;
     justify-content: right;
@@ -25,7 +17,6 @@ img {
 }
 
 .top button {
-    width: 150px;
 	height: 3rem;
     justify-content: center;
     align-items: center;
@@ -34,6 +25,12 @@ img {
 
 .top h2 {
 	margin-right: 1rem;
+}
+
+#toggle-mine-button {
+	width: 3em; 
+	height: 3em;
+	background-size: contain !important; 
 }
 
 #game-board {
@@ -50,13 +47,15 @@ app-square {
 }
 
 .outside-levels {
-	display: grid;
-	columns: 2;
+	display: flex;
+	flex-direction: column;
 }
 
 .inside-levels {
-    display: grid;
-	grid-template-columns: repeat(4, auto);
+    display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	max-height: 36em;
 }
 
 .outside-levels button {
@@ -69,12 +68,15 @@ app-square {
 	height: 25px;
 }
 
-.section3 {
-	margin-top: 4em;
-	border-style: solid;
+.inside-levels img {
+	position: absolute;
 }
 
-/* Custom Button Styles */
+.section3 {
+	text-align: center;
+}
+
+/* Custom Button Styles */ 
 .intro-button {
 	background-color: #ff5bb0;
 	border-radius: 5px;

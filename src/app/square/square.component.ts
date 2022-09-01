@@ -9,6 +9,7 @@ export class SquareComponent {
 
   @Input() value: 'B' | 'X' | number | undefined;
   @Input() color: string | undefined;
+  @Input() mineImage: string | undefined;
 
   mine(): boolean {
     if (this.value == 'B') return true;

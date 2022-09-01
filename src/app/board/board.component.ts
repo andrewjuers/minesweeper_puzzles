@@ -25,6 +25,7 @@ export class BoardComponent implements OnInit {
   user:IUser;
   loading:boolean;
   won = false;
+  mineImage = "assets/images/heart.png";
 
   constructor(private cognitoService: CognitoService, private awsGatewayService: AwsGatewayService) {
     this.loading = false;
@@ -205,6 +206,7 @@ export class BoardComponent implements OnInit {
   toggleShowLevels(levels:any, name:string = "") {
     if (this.displayLevels == levels) {
       this.showLevels();
+      this.currentDisplayLevelsName = "";
       return;
     }
     this.showLevels(levels);
@@ -246,8 +248,9 @@ export class BoardComponent implements OnInit {
   getLevelSaveData(idx: number, win=false): boolean {
     // Stop if user is not logged in
     if (this.user.email == undefined) return false;
-  
-    const name = this.currentDisplayLevelsName.toLocaleLowerCase().replace(/\s+/g, '');
+    // Use regex to determine proper user atrribute
+    const name = win ? this.currentPuzzleName.toLocaleLowerCase().replace(/\s+/g, '').match(/^[^-]*/) : this.currentDisplayLevelsName.toLocaleLowerCase().replace(/\s+/g, '');
+    if (win) console.log("name: " + name);
     let levelString = "";
     let c = '';
     if (name == "intro") {
@@ -297,9 +300,11 @@ export class BoardComponent implements OnInit {
         levelString = levelString.substring(0,idx) + '1' + levelString.substring(idx+1);
         this.user.bonus = levelString;
       }
-    } 
+    }
+    else {
+      return false;
+    }
     if (win && this.currentPuzzleName != "Random") {
-      console.log(levelString);
       this.postUserInfo();
       return true;
     }
@@ -307,9 +312,13 @@ export class BoardComponent implements OnInit {
     return c == '1';
   }
 
+  toggleMineImage() {
+    this.mineImage = this.mineImage == "assets/images/heart.png" ? "assets/images/mine.png" : "assets/images/heart.png";
+  }
+
 }
 
-
+////##########################****************************************999999999999999999999966666
 
 
 
