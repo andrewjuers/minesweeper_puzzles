@@ -2,6 +2,14 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.0.
 
+## Website
+
+Visit http://959155minesweeper-puzzles.s3-website-us-west-2.amazonaws.com/ with Google Chrome.
+
+## Description
+
+MVP WebApp for minesweeper puzzles. Learn, play, and try to get on the leaderboards.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
