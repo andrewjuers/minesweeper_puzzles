@@ -25,11 +25,27 @@ export class SignInComponent {
     this.loading = true;
     this.cognitoService.signIn(this.user)
     .then(() => {
-      this.awsGatewayService.postData(this.user);
+      this.getUserInfo();
       this.router.navigate(['/board']);
     }).catch(() => {
       this.loading = false;
     });
+  }
+
+  getUserInfo() {
+    this.awsGatewayService.getData(this.user.email).subscribe(
+      (data:any) => {
+        this.user.score = Number(data.score["N"]);
+        this.user.intro = data.intro["S"];
+        this.user.level1 = data.level1["S"];
+        this.user.level2 = data.level2["S"];
+        this.user.level3 = data.level3["S"];
+        this.user.level4 = data.level4["S"];
+        this.user.bonus = data.bonus["S"];
+        this.user.levels = data.levels['N'];
+        this.awsGatewayService.postData(this.user);
+      }
+    );
   }
 
 }

@@ -237,6 +237,7 @@ export class BoardComponent implements OnInit {
         this.user.level3 = data.level3["S"];
         this.user.level4 = data.level4["S"];
         this.user.bonus = data.bonus["S"];
+        this.user.levels = data.levels['N'];
         this.postUserInfo();
       }
     );
