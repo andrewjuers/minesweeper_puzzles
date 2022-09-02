@@ -23,6 +23,7 @@ export class BoardComponent implements OnInit {
   levels = [introLevels, levelOne, levelTwo, levelThree, levelFour, bonusLevels];
   currentPuzzleName = "Random";
   currentDisplayLevelsName = "";
+  currentPuzzleNumber = 1;
   displayLevels: any = false;
   user:IUser;
   loading:boolean;
@@ -190,7 +191,10 @@ export class BoardComponent implements OnInit {
 
   loadGame(info:any = introLevels[0], name="Random", nameNumber=0) {
     this.currentPuzzleName = name;
-    if (nameNumber > 0) this.currentPuzzleName = this.currentDisplayLevelsName + " - " + nameNumber;
+    if (nameNumber > 0) {
+      this.currentPuzzleName = this.currentDisplayLevelsName + " - " + nameNumber;
+      this.currentPuzzleNumber = nameNumber;
+    }
     this.width = info["columns"];
     this.height = info["rows"];
     this.newGame();
@@ -243,9 +247,10 @@ export class BoardComponent implements OnInit {
   }
 
   winGame() {
-    if (!this.won && (this.currentPuzzleName == "Random" || !this.getLevelSaveData(Number(this.currentPuzzleName.slice(-1)) - 1))) {
+    let idx = this.currentPuzzleNumber - 1;
+    if (!this.won && (this.currentPuzzleName == "Random" || !this.getLevelSaveData(idx))) {
       this.user.score += 1;
-      if (this.currentPuzzleName != "Random") this.getLevelSaveData(Number(this.currentPuzzleName.slice(-1)) - 1, true);
+      if (this.currentPuzzleName != "Random") this.getLevelSaveData(idx, true);
       this.postUserInfo();
     }
     this.won = true;

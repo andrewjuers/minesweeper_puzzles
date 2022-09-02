@@ -27,4 +27,8 @@ export class HomePageComponent implements OnInit {
     )
   }
 
+  shortenEmail(s: string): any {
+    return s.match(/^[^@]*/);
+  }
+
 }

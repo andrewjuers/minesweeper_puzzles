@@ -16,7 +16,7 @@ export class AwsGatewayService {
     this.http.post(this.baseURL + '/minesweeper-puzzles', {
       email: user.email,
       score: user.score == undefined ? "0" : user.score.toString(),
-      intro: user.intro == undefined ? "00000000000" : user.intro,
+      intro: user.intro == undefined ? new Array(12).join("0") : user.intro,
       level1: user.level1 == undefined ? new Array(39).join("0") : user.level1,
       level2: user.level2 == undefined ? new Array(32).join("0") : user.level2,
       level3: user.level3 == undefined ? new Array(23).join("0") : user.level3,
@@ -65,6 +65,7 @@ export class AwsGatewayService {
   }
 
   checkStringForOnes(s: string): number {
+    if (s == undefined) return 0;
     let oneCount = 0;
     for (let i=0; i<s.length; i++) {
       if (s.charAt(i) == '1') oneCount++;

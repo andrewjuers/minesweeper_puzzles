@@ -19,15 +19,15 @@
         <div class="container position-relative">
             <div class="row justify-content-center">
                 <div class="col-xl-6">
-                    <div class="text-center text-white">
+                    <div class="text-center text-white" style="z-index: 1;">
                         <!-- Page heading-->
                         <h1 class="mb-5" href="/board" style="color: black;">Ready to Solve Puzzles?</h1>
-                        <a routerLink="/board" style="font-size: larger; z-index: 100;"><b>Play</b></a>
+                        <a routerLink="/board" style="font-size: larger; z-index: 1;"><b>Play</b></a>
                         <br>
                         <img src="assets/images/10x10.PNG" style="height:25em">
                     </div>
                 </div>
-                <div style="margin-top: -32em; margin-right: 4em">
+                <div style="margin-top: -32em; margin-right: 4em; pointer-events: none;">
                     <h2>Top Level Clears</h2>
                     <table>
                         <tr>
@@ -37,7 +37,7 @@
                         </tr>
                         <tr *ngFor="let user of topLevelClears; let i = index">
                             <td>{{i+1}}</td>
-                            <td>{{user["email"]['S']}}</td>
+                            <td>{{shortenEmail(user["email"]['S'])}}</td>
                             <td>{{user["levels"]['N']}}</td>
                         </tr>
                         
@@ -52,7 +52,7 @@
                         </tr>
                         <tr *ngFor="let user of topPuzzlesSolved; let i = index">
                             <td>{{i+1}}</td>
-                            <td>{{user["email"]['S']}}</td>
+                            <td>{{shortenEmail(user["email"]['S'])}}</td>
                             <td>{{user["score"]['N']}}</td>
                         </tr>
                     </table>

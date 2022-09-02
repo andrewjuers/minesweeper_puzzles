@@ -39,7 +39,7 @@ export class ProfileComponent implements OnInit {
   getUserInfo() {
     this.awsGatewayService.getData(this.user.email).subscribe(
       (data:any) => {
-        this.user.score = Number(data.score["N"]);
+        this.user.score = data.score == undefined ? 0 : Number(data.score["N"]);
         this.user.intro = data.intro["S"];
         this.user.level1 = data.level1["S"];
         this.user.level2 = data.level2["S"];

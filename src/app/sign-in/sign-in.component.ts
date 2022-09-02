@@ -25,6 +25,7 @@ export class SignInComponent {
     this.loading = true;
     this.cognitoService.signIn(this.user)
     .then(() => {
+      this.awsGatewayService.postData(this.user);
       this.router.navigate(['/board']);
     }).catch(() => {
       this.loading = false;
